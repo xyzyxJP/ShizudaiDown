@@ -51,8 +51,8 @@ def calc_duration():
 def add_duration(duration):
     with psycopg2.connect(DATABASE_URL) as connect:
         with connect.cursor() as cursor:
-            extras.execute_values(cursor,
-                                  "INSERT INTO login_logs(duration) VALUES %s", duration)
+            cursor.execute(
+                "INSERT INTO login_logs(duration) VALUES (%s)", duration)
 
 
 def get_recent_durations():
