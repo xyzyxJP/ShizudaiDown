@@ -1,9 +1,9 @@
-import requests
-from lxml import html
 from bs4 import BeautifulSoup
-import psycopg2
-import time
+from lxml import html
 import os
+import psycopg2
+import requests
+import time
 
 session = requests.session()
 USERNAME = os.environ.get('GAKUJO_USERNAME')
