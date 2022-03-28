@@ -1,4 +1,3 @@
-import datetime
 from bs4 import BeautifulSoup
 from lxml import html
 import os
@@ -53,7 +52,7 @@ def add_duration(duration):
     with psycopg2.connect(DATABASE_URL) as connect:
         with connect.cursor() as cursor:
             extras.execute_values(cursor,
-                                  "INSERT INTO login_logs(duration) VALUES(%s)", datetime.fromseconds(duration))
+                                  "INSERT INTO login_logs(duration) VALUES(%s)", duration)
 
 
 def get_recent_durations():
