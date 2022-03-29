@@ -10,6 +10,7 @@ import pandas as pd
 import datetime
 import seaborn as sns
 import tweepy
+from decimal import Decimal, ROUND_HALF_UP
 
 session = requests.session()
 apache = None
@@ -98,7 +99,6 @@ def plot_durations(filename):
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
     plt.ylim(5, 20)
     ax.axhspan(ymin=15, ymax=99, color='#c92a2a', alpha=0.3)
-    print(df[-1:]['timestamp'])
     ax.text(0.99, 0.99, df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S'), va='top', ha='right',
             transform=ax.transAxes, color='#f8f9fa', size=16)
     ax.text(0.99, 0.02, '@ShizudaiDown', horizontalalignment='right',
@@ -112,7 +112,7 @@ def post_tweet(timestamp, duration, filename):
     auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
     t = tweepy.API(auth)
     t.update_status_with_media(
-        status='ShizudaiDown {} {}s'.format(timestamp, duration), filename=filename)
+        status='ShizudaiDown {} {}s'.format(timestamp, str(Decimal(duration).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP))), filename=filename)
 
 
 if 3 <= datetime.datetime.now().hour < 5:
