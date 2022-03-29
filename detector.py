@@ -100,7 +100,7 @@ def plot_durations(filename):
             transform=ax.transAxes, color='#f8f9fa', size=36)
     ax.text(0.98, 0.02, '@ShizudaiDown', horizontalalignment='right',
             transform=ax.transAxes, color='#f8f9fa', size=36)
-    ax.set_title('Shizuoka University Downdetector',
+    ax.set_title('Shizudai Downdetector',
                  loc='center', color='#f8f9fa', size=54, pad=36)
     fig.savefig('plot.png')
     return df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S')
