@@ -69,7 +69,7 @@ def get_recent_durations():
         with connect.cursor() as cursor:
             cursor.execute(
                 'SELECT * FROM login_logs ORDER BY timestamp limit 48')
-            return pd.dataframe(cursor.fetchall())
+            return pd.DataFrame(cursor.fetchall())
 
 
 def plot_durations():
