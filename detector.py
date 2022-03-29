@@ -98,12 +98,13 @@ def plot_durations():
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
     plt.ylim(5, 20)
     ax.axhspan(ymin=15, ymax=99, color='#c92a2a', alpha=0.3)
-    ax.text(0.99, 0.99, df[-1:]['timestamp'].strftime('%Y-%m-%d %H:%M:%S'), va='top', ha='right',
+    print(df[-1:]['timestamp'])
+    ax.text(0.99, 0.99, df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S'), va='top', ha='right',
             transform=ax.transAxes, color='#f8f9fa', size=16)
     ax.text(0.99, 0.02, '@ShizudaiDown', horizontalalignment='right',
             transform=ax.transAxes, color='#f8f9fa', size=16)
     fig.savefig('plot.png')
-    return df[-1:]['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+    return df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S')
 
 
 def post_tweet(timestamp):
