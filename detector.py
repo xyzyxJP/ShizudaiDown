@@ -61,7 +61,7 @@ def add_duration(duration):
     with pg.connect(DATABASE_URL) as connect:
         with connect.cursor() as cursor:
             cursor.execute(
-                'INSERT INTO login_logs(duration) VALUES (%s)', (duration,))
+                'INSERT INTO login_logs(duration, timestamp) VALUES (%s, %s)', (duration, datetime.datetime.now()))
 
 
 def get_recent_durations():
