@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as bs4
 from lxml import html
 import os
 import psycopg2 as pg
@@ -39,7 +39,7 @@ def calc_duration():
         'j_username': GAKUJO_USERNAME, 'j_password': GAKUJO_PASSWORD, '_eventId_proceed': ''})
     if ('ユーザ名またはパスワードが正しくありません。' in login.text):
         return 0
-    bs = bs(login.text, 'html.parser')
+    bs = bs4(login.text, 'html.parser')
     relay_state = html.fromstring(str(bs)).xpath(
         '/html/body/form/div/input[1]/@value')[0]
     saml_response = html.fromstring(str(bs)).xpath(
@@ -50,7 +50,7 @@ def calc_duration():
                 headers={'Referer': 'https://idp.shizuoka.ac.jp/'})
     login = session.post('https://gakujo.shizuoka.ac.jp/portal/home/home/initialize',
                          data={'EXCLUDE_SET': ''}, headers={'Referer': 'https://idp.shizuoka.ac.jp/'})
-    bs = bs(login.text, 'html.parser')
+    bs = bs4(login.text, 'html.parser')
     apache = html.fromstring(str(bs)).xpath(
         '/html/body/div[1]/form[1]/div/input/@value')
     end_time = time.perf_counter()
