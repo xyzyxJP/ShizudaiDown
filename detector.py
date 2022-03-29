@@ -66,10 +66,7 @@ def add_duration(duration):
 
 def get_recent_durations():
     with pg.connect(DATABASE_URL) as connect:
-        with connect.cursor() as cursor:
-            cursor.execute(
-                'SELECT * FROM login_logs ORDER BY timestamp limit 48')
-            return pd.DataFrame(cursor.fetchall())
+        return pd.read_sql('SELECT * FROM login_logs ORDER BY timestamp limit 48', connect)
 
 
 def plot_durations():
