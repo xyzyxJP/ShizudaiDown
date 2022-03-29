@@ -69,16 +69,16 @@ def get_recent_durations():
         with connect.cursor() as cursor:
             cursor.execute(
                 'SELECT * FROM login_logs ORDER BY timestamp limit 48')
-            df = pd.DataFrame(cursor.fetchall, columns=[
-                              d.name for d in cursor.description])
-            dict = {}
+            column_list = [d.name for d in cursor.description]
+            df = pd.DataFrame(cursor.fetchall(), columns=column_list)
+            dtype_dict = {}
             for d in cursor.description:
                 if d.type_code == 1700:
-                    dict[d.name] = 'float64'
+                    dtype_dict[d.name] = 'float64'
                 if d.type_code == 1082:
-                    dict[d.name] = 'datetime64'
-            if len(dict) > 0:
-                df = df.astype(dict)
+                    dtype_dict[d.name] = 'datetime64'
+            if len(dtype_dict) > 0:
+                df = df.astype(dtype_dict)
             return df
 
 
