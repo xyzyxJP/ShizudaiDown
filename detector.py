@@ -108,6 +108,8 @@ def post_tweet():
         status='ShizudaiDown {}'.format(datetime.datetime.now()), filename='plot.png')
 
 
+if 3 <= datetime.datetime.now().hour < 5:
+    exit()
 add_duration(calc_duration())
 plot_durations()
 post_tweet()
