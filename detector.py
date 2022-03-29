@@ -124,6 +124,6 @@ if 3 <= datetime.datetime.now().hour < 5:
 duration = calc_duration()
 add_duration(duration)
 timestamp = plot_durations('plot.png')
-if 23 <= datetime.datetime.now().hour < 9 and duration < 15:
+if (23 <= datetime.datetime.now().hour or datetime.datetime.now().hour < 9) and duration < 15:
     exit()
 post_tweet(timestamp, duration, 'plot.png')
