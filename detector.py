@@ -111,7 +111,7 @@ def post_tweet(timestamp, duration, filename):
     auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
     t = tweepy.API(auth)
     t.update_status_with_media(
-        status='学務情報システムのログイン処理時間は{}sです\r\n{}現在'.format(str(Decimal(duration).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)), timestamp), filename=filename)
+        status='学務情報システムのログイン処理時間は{}秒です\r\n{}現在'.format(str(Decimal(duration).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)), timestamp), filename=filename)
 
 
 if 3 <= datetime.datetime.now().hour < 5:
