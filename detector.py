@@ -105,7 +105,7 @@ def post_tweet():
     auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
     t = tweepy.API(auth)
     t.update_status_with_media(
-        status='Hello World from Heroku.', filename='plot.png')
+        status='ShizudaiDown {}'.fromat(datetime.datetime.now()), filename='plot.png')
 
 
 add_duration(calc_duration())
