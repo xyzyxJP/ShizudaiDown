@@ -62,14 +62,14 @@ def add_duration(duration):
     with pg.connect(DATABASE_URL) as connect:
         with connect.cursor() as cursor:
             cursor.execute(
-                'INSERT INTO login_logs(duration, timestamp) VALUES (%s, %s)', (duration, datetime.datetime.now()))
+                'insert into login_logs(duration, timestamp) values (%s, %s)', (duration, datetime.datetime.now()))
 
 
 def get_recent_durations():
     with pg.connect(DATABASE_URL) as connect:
         with connect.cursor() as cursor:
             cursor.execute(
-                'SELECT * FROM login_logs ORDER BY timestamp limit 48')
+                'select * from (select * from login_logs order by timestamp desc limit 48) as x order by timestamp')
             column_list = [d.name for d in cursor.description]
             df = pd.DataFrame(cursor.fetchall(), columns=column_list)
             dtype_dict = {}
