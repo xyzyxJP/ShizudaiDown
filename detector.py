@@ -93,7 +93,7 @@ def plot_durations(filename):
     ax.set_facecolor('#343a40')
     ax.tick_params(axis='x', colors='#f8f9fa', labelsize=32)
     ax.tick_params(axis='y', colors='#f8f9fa', labelsize=32)
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
+    ax.xaxis.set_major_locator(mdates.HourLocator(interval=6))
     ax.set_ylim(5, 20)
     ax.axhspan(ymin=15, ymax=21, color='#c92a2a', alpha=0.3)
     ax.text(0.98, 0.98, df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S'), va='top', ha='right',
