@@ -94,8 +94,8 @@ def plot_durations(filename):
     ax.tick_params(axis='x', colors='#f8f9fa', labelsize=32)
     ax.tick_params(axis='y', colors='#f8f9fa', labelsize=32)
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=6))
-    ax.set_ylim(5, 20)
-    ax.axhspan(ymin=15, ymax=21, color='#c92a2a', alpha=0.3)
+    ax.set_ylim(5, 22)
+    ax.axhspan(ymin=17, ymax=23, color='#c92a2a', alpha=0.3)
     ax.text(0.98, 0.98, df[-1:]['timestamp'].iloc[-1].strftime('%Y-%m-%d %H:%M:%S'), va='top', ha='right',
             transform=ax.transAxes, color='#f8f9fa', size=36)
     ax.text(0.98, 0.02, '@ShizudaiDown', horizontalalignment='right',
@@ -112,7 +112,7 @@ def post_tweet(timestamp, duration, filename):
     t = tweepy.API(auth)
     status = '学務情報システムのログイン処理は{}秒です'.format(str(
         Decimal(duration).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)))
-    if duration >= 15:
+    if duration >= 17:
         status += '\r\n通常よりログイン処理に時間が掛かっています'
     status += '\r\n{}'.format(timestamp)
     t.update_status_with_media(
@@ -124,8 +124,8 @@ if 3 <= datetime.datetime.now().hour < 5:
 duration = calc_duration()
 add_duration(duration)
 timestamp = plot_durations('plot.png')
-# if (23 <= datetime.datetime.now().hour or datetime.datetime.now().hour < 9) and duration < 15:
+# if (23 <= datetime.datetime.now().hour or datetime.datetime.now().hour < 9) and duration < 17:
 #     exit()
-if duration < 15:
+if duration < 17:
     exit()
 post_tweet(timestamp, duration, 'plot.png')
